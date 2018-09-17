@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
 // SHOW, SHOW ONE
 router.get('/:id', (req, res) => {
   User.findById(req.params.id)
-    .then ((user) => {
+    .then((user) => {
       res.render('users/show', { user })
     })
 })
@@ -22,6 +22,14 @@ router.get('/:id', (req, res) => {
 // NEW , RENDER NEW FORM
 
 // CREATE
+router.post('/', (req, res) => {
+  // const newUser = new User(req.body)
+  // newUser.save()
+  User.create(req.body)
+    .then((user) => {
+      res.send(user)
+    })
+})
 
 // EDIT , RENDER EDIT FORM
 
