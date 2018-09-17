@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
   User.findById(req.params.id)
     .then ((user) => {
-      res.send(user)
+      res.render('users/show', { user })
     })
 })
 
