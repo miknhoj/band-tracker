@@ -11,6 +11,12 @@ router.get('/', (req, res) => {
     })
 })
 
+
+// NEW , RENDER NEW FORM
+router.get('/new', (req, res) => {
+  res.render('users/new')
+})
+
 // SHOW, SHOW ONE
 router.get('/:id', (req, res) => {
   User.findById(req.params.id)
@@ -19,15 +25,13 @@ router.get('/:id', (req, res) => {
     })
 })
 
-// NEW , RENDER NEW FORM
-
 // CREATE
 router.post('/', (req, res) => {
   // const newUser = new User(req.body)
   // newUser.save()
   User.create(req.body)
     .then((user) => {
-      res.send(user)
+      res.redirect(`/users/${user._id}`)
     })
 })
 
