@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 const {  User} = require('../db/schema')
 
-
 // INDEX , SHOW ALL
 router.get('/', (req, res) => {
   User.find()
@@ -10,7 +9,6 @@ router.get('/', (req, res) => {
       res.render('users/index', { users })
     })
 })
-
 
 // NEW , RENDER NEW FORM
 router.get('/new', (req, res) => {
@@ -25,6 +23,14 @@ router.get('/:id', (req, res) => {
     })
 })
 
+// EDIT , RENDER EDIT FORM
+router.get('/:id/edit', (req, res) => {
+  User.findById(req.params.id)
+    .then((user) => {
+      res.render('users/edit', { user })
+    })
+})
+
 // CREATE
 router.post('/', (req, res) => {
   // const newUser = new User(req.body)
@@ -34,8 +40,6 @@ router.post('/', (req, res) => {
       res.redirect(`/users/${user._id}`)
     })
 })
-
-// EDIT , RENDER EDIT FORM
 
 // UPDATE
 router.put('/:id', (req, res) => {
