@@ -6,7 +6,13 @@ const { User } = require('../db/schema')
 router.get('/', (req, res) => {
     User.findById(req.params.userId)
         .then((user) => {   
-            res.send(user.bands)
+            res.render('bands/index', {
+                userId: req.params.userId,
+                bands: [user.bands]
+            })
+        })
+        .catch(error => {
+            console.log(error)
         })
 })
 

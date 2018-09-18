@@ -27,16 +27,22 @@ const nickle = new Band ({
     gigs: [monday]
 })
 
+const mickle = new Band ({
+    name: 'MickelBack',
+    genre: 'Awesome',
+    gigs: [monday]
+})
+
 const mancy = new User({
     username: 'Mancy',
     city: 'Atlanta',
-    bands: [nickle]
+    bands: [nickle, mickle]
 })
 
 const nancy = new User({
     username: 'Nancy',
     city: 'Hotlanta',
-    bands: [nickle]
+    bands: [nickle, mickle]
 })
 
 User.deleteMany()
