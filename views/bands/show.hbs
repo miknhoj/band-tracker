@@ -1,0 +1,23 @@
+<h1>Showing One Band</h1>
+
+<div>
+    Username: {{band.name}}
+</div>
+<div>
+    Genre: {{band.genre}}
+</div>
+
+
+{{!-- <form action='/users/{{user._id}}/edit' method='GET'>
+    <input type="submit" value="Edit User">
+</form> --}}
+
+<form action='/users/{{userId}}/bands/{{band._id}}?_method=DELETE' method='POST'>
+    <input type="submit" value="Delete Band">
+</form>
+<div>
+<a href='/users/{{userId}}/bands/{{band._id}}/edit'>Edit Band</a>
+</div>
+<div>
+<a href='/users/{{userId}}/bands'>Go Back to Bands</a>
+</div>

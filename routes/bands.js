@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router({ mergeParams: true} );
-const { User } = require('../db/schema')
+const { User, Band } = require('../db/schema')
 
 // INDEX, SHOW ALL
 router.get('/', (req, res) => {
@@ -8,7 +8,7 @@ router.get('/', (req, res) => {
         .then((user) => {   
             res.render('bands/index', {
                 userId: req.params.userId,
-                bands: [user.bands]
+                bands: user.bands
             })
         })
         .catch(error => {
@@ -23,15 +23,28 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     User.findById(req.params.userId)
         .then((user) => {   
-            res.send(user.bands.id(req.params.id))
+            res.render('bands/show', {
+                userId: req.params.userId,
+                band: user.bands.id(req.params.id)
         })
+    })
 })
 
 // EDIT, RENDER EDIT FORM
 
 
 // CREATE
-
+router.post('/', (req, res) => {
+    const newBand = new Band(req.body)
+    User.findById(req.params.userId)
+        .then((user) => {
+            user.bands.push(newBand)
+            return user.save()
+        })
+        .then((user) => {
+            res.redirect(`/users/${req.params.userId}/bands`)
+        })
+})
 
 // UPDATE
 
